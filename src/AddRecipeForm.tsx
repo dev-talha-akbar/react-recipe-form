@@ -5,7 +5,7 @@ import IngredientsSelect from "./IngredientsSelect";
 import RecipeGuideInput from "./RecipeGuideInput";
 
 interface AddRecipeFormProps {
-  [x: string]: string;
+  [x: string]: unknown;
 }
 
 export default function AddRecipeForm({ ...rest }: AddRecipeFormProps) {

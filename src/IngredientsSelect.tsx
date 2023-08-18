@@ -1,21 +1,23 @@
 import { useState } from "react";
-import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+
+import IngredientsSearchInput from "./IngredientsSearchInput";
+import { Ingredient } from "./types";
 
 interface IngredientsSelectProps {
-  [x: string]: string;
+  [x: string]: unknown;
 }
 
 export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
-  const [ingredients] = useState([]);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   return (
     <div {...rest}>
-      <Form.Group className="mb-3" controlId="ingredientsSelect">
-        <Form.Label>Choose ingredients</Form.Label>
-        <Form.Control type="text" placeholder="Search for an ingredient" />
-      </Form.Group>
+      <IngredientsSearchInput
+        onIngredientSelect={(i) => setIngredients([...ingredients, i])}
+      />
       {ingredients.length === 0 && (
-        <Card className="text-center">
+        <Card className="text-center bg-body-secondary border-0">
           <Card.Body>
             <div className="p-4">
               <Card.Title>No ingredients added</Card.Title>
@@ -25,6 +27,19 @@ export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
               </Card.Text>
             </div>
           </Card.Body>
+        </Card>
+      )}
+
+      {ingredients.length > 0 && (
+        <Card>
+          <Card.Header>Selected ingredients</Card.Header>
+          <ListGroup variant="flush">
+            {ingredients?.map((ingredient) => (
+              <ListGroup.Item key={ingredient.id}>
+                {ingredient.title}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
         </Card>
       )}
     </div>
