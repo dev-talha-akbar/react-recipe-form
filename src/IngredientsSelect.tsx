@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import Button from "react-bootstrap/Button";
 
 import IngredientsSearchInput from "./IngredientsSearchInput";
 import { Ingredient } from "./types";
@@ -36,7 +37,17 @@ export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
           <ListGroup variant="flush">
             {ingredients?.map((ingredient) => (
               <ListGroup.Item key={ingredient.id}>
-                {ingredient.title}
+                <div className="d-flex align-items-center justify-content-between">
+                  <span>{ingredient.title}</span>
+                  <div className="d-flex gap-2">
+                    <Button variant="light" size="sm">
+                      <i className="bi bi-pencil"></i>
+                    </Button>
+                    <Button variant="light" size="sm" className="text-danger">
+                      <i className="bi bi-trash"></i>
+                    </Button>
+                  </div>
+                </div>
               </ListGroup.Item>
             ))}
           </ListGroup>
