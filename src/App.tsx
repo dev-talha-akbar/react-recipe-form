@@ -1,12 +1,13 @@
-import Button from 'react-bootstrap/Button';
-import './App.scss'
+import AddRecipeForm from "./AddRecipeForm";
+
+import "./App.scss";
 
 function App() {
   return (
-    <>
-      <Button>Click me</Button>
-    </>
-  )
+    <div className="container py-4">
+      <AddRecipeForm className="col-6" />
+    </div>
+  );
 }
 
-export default App
+export default App;
