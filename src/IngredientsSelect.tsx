@@ -4,18 +4,31 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
 import IngredientsSearchInput from "./IngredientsSearchInput";
-import { Ingredient } from "./types";
+import { RecipeIngredient } from "./types";
+import { formatQuantity } from "./ingredientUtils";
 
 interface IngredientsSelectProps {
   [x: string]: unknown;
 }
 
 export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
-  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const [ingredients, setIngredients] = useState<RecipeIngredient[]>([]);
   return (
     <div {...rest}>
       <IngredientsSearchInput
-        onIngredientSelect={(i) => setIngredients([...ingredients, i])}
+        onIngredientSelect={(ingredient) => {
+          const unit = ingredient.defaultUnit;
+          const quantity = ingredient.defaultQuantity;
+
+          setIngredients([
+            ...ingredients,
+            {
+              ingredient,
+              unit,
+              quantity,
+            },
+          ]);
+        }}
       />
       {ingredients.length === 0 && (
         <Card className="text-center bg-body-secondary border-0">
@@ -35,10 +48,16 @@ export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
         <Card>
           <Card.Header>Selected ingredients</Card.Header>
           <ListGroup variant="flush">
-            {ingredients?.map((ingredient) => (
-              <ListGroup.Item key={ingredient.id}>
+            {ingredients?.map((recipeIngredient) => (
+              <ListGroup.Item key={recipeIngredient.ingredient.id}>
                 <div className="d-flex align-items-center justify-content-between">
-                  <span>{ingredient.title}</span>
+                  <span>
+                    {recipeIngredient.ingredient.title},{" "}
+                    {formatQuantity(
+                      recipeIngredient.quantity,
+                      recipeIngredient.unit.shortPattern
+                    )}
+                  </span>
                   <div className="d-flex gap-2">
                     <Button variant="light" size="sm">
                       <i className="bi bi-pencil"></i>
