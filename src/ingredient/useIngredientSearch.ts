@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { Ingredient } from "./types";
+import { Ingredient } from "../types";
 
 export default function useIngredientSearch(query: string) {
   const {

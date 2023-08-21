@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 
 import IngredientsSearchInput from "./IngredientsSearchInput";
 import IngredientEditForm from "./IngredientEditForm";
-import { RecipeIngredient } from "./types";
+import { RecipeIngredient } from "../types";
 import { formatQuantity } from "./ingredientUtils";
 
 interface IngredientsSelectProps {

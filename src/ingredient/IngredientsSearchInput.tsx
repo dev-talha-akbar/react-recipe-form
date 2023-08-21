@@ -7,7 +7,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 import useIngredientSearch from "./useIngredientSearch";
 
-import { Ingredient } from "./types";
+import { Ingredient } from "../types";
 
 interface IngredientsSearchInputProps {
   onIngredientSelect?: (ingredient: Ingredient) => void;

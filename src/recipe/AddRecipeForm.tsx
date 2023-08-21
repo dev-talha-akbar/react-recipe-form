@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import IngredientsSelect from "./IngredientsSelect";
+import IngredientsSelect from "../ingredient/IngredientsSelect";
 import RecipeGuideInput from "./RecipeGuideInput";
 
 interface AddRecipeFormProps {
