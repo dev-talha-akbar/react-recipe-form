@@ -4,6 +4,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
 import IngredientsSearchInput from "./IngredientsSearchInput";
+import IngredientEditForm from "./IngredientEditForm";
 import { RecipeIngredient } from "./types";
 import { formatQuantity } from "./ingredientUtils";
 
@@ -59,9 +60,16 @@ export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
                     )}
                   </span>
                   <div className="d-flex gap-2">
-                    <Button variant="light" size="sm">
-                      <i className="bi bi-pencil"></i>
-                    </Button>
+                    <IngredientEditForm
+                      recipeIngredient={recipeIngredient}
+                      onChange={(newRecipeIngredient) => {
+                        setIngredients([
+                          ...ingredients.slice(0, index),
+                          newRecipeIngredient,
+                          ...ingredients.slice(index + 1),
+                        ]);
+                      }}
+                    />
                     <Button
                       variant="light"
                       size="sm"

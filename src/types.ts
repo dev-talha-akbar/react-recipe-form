@@ -1,5 +1,6 @@
 export interface IngredientUnit {
   id: string;
+  title: string;
   fullPattern: string;
   shortPattern: string;
 }
