@@ -48,7 +48,7 @@ export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
         <Card>
           <Card.Header>Selected ingredients</Card.Header>
           <ListGroup variant="flush">
-            {ingredients?.map((recipeIngredient) => (
+            {ingredients?.map((recipeIngredient, index) => (
               <ListGroup.Item key={recipeIngredient.ingredient.id}>
                 <div className="d-flex align-items-center justify-content-between">
                   <span>
@@ -62,7 +62,19 @@ export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
                     <Button variant="light" size="sm">
                       <i className="bi bi-pencil"></i>
                     </Button>
-                    <Button variant="light" size="sm" className="text-danger">
+                    <Button
+                      variant="light"
+                      size="sm"
+                      className="text-danger"
+                      onClick={() => {
+                        setIngredients(
+                          ingredients.filter(
+                            (_recipeIngredient, deletedIndex) =>
+                              index !== deletedIndex
+                          )
+                        );
+                      }}
+                    >
                       <i className="bi bi-trash"></i>
                     </Button>
                   </div>
