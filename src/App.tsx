@@ -1,5 +1,5 @@
 import { QueryClientProvider, QueryClient } from "react-query";
-import AddRecipeForm from "./recipe/AddRecipeForm";
+import AddRecipeForm from "./addRecipeForm/AddRecipeForm";
 
 import "./App.scss";
 

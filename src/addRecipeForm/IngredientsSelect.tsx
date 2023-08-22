@@ -4,16 +4,24 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
 import IngredientsSearchInput from "./IngredientsSearchInput";
-import IngredientEditForm from "./IngredientEditForm";
+import EditIngredientForm from "./EditIngredientForm";
 import { RecipeIngredient } from "../types";
 import { formatQuantity } from "./ingredientUtils";
 
 interface IngredientsSelectProps {
+  ingredients: RecipeIngredient[];
+  onChange?: (ingredients: RecipeIngredient[]) => void;
   [x: string]: unknown;
 }
 
-export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
-  const [ingredients, setIngredients] = useState<RecipeIngredient[]>([]);
+export default function IngredientsSelect({
+  ingredients: initialIngredients,
+  onChange,
+  ...rest
+}: IngredientsSelectProps) {
+  const [ingredients, setIngredients] =
+    useState<RecipeIngredient[]>(initialIngredients);
+
   return (
     <div {...rest}>
       <IngredientsSearchInput
@@ -21,14 +29,17 @@ export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
           const unit = ingredient.defaultUnit;
           const quantity = ingredient.defaultQuantity;
 
-          setIngredients([
+          const newIngredients = [
             ...ingredients,
             {
               ingredient,
               unit,
               quantity,
             },
-          ]);
+          ];
+
+          setIngredients(newIngredients);
+          onChange?.(newIngredients);
         }}
       />
       {ingredients.length === 0 && (
@@ -60,14 +71,17 @@ export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
                     )}
                   </span>
                   <div className="d-flex gap-2">
-                    <IngredientEditForm
+                    <EditIngredientForm
                       recipeIngredient={recipeIngredient}
                       onChange={(newRecipeIngredient) => {
-                        setIngredients([
+                        const newIngredients = [
                           ...ingredients.slice(0, index),
                           newRecipeIngredient,
                           ...ingredients.slice(index + 1),
-                        ]);
+                        ];
+
+                        setIngredients(newIngredients);
+                        onChange?.(newIngredients);
                       }}
                     />
                     <Button
@@ -75,12 +89,13 @@ export default function IngredientsSelect({ ...rest }: IngredientsSelectProps) {
                       size="sm"
                       className="text-danger"
                       onClick={() => {
-                        setIngredients(
-                          ingredients.filter(
-                            (_recipeIngredient, deletedIndex) =>
-                              index !== deletedIndex
-                          )
+                        const newIngredients = ingredients.filter(
+                          (_recipeIngredient, deletedIndex) =>
+                            index !== deletedIndex
                         );
+
+                        setIngredients(newIngredients);
+                        onChange?.(newIngredients);
                       }}
                     >
                       <i className="bi bi-trash"></i>
