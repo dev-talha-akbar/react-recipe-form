@@ -23,7 +23,7 @@ export default function IngredientsSearchInput({
 
   const { matchingIngredients, isLoading } = useIngredientSearch(cleanQuery);
 
-  const target = useRef(null);
+  const target = useRef<HTMLInputElement>(null);
 
   return (
     <div {...rest}>
@@ -38,6 +38,7 @@ export default function IngredientsSearchInput({
         />
       </Form.Group>
       <Overlay
+        container={target.current?.parentElement}
         target={target.current}
         show={cleanQuery.length >= 2}
         placement="bottom-start"
@@ -55,6 +56,7 @@ export default function IngredientsSearchInput({
             className="mt-2 shadow"
             style={{
               width: "420px",
+              zIndex: 1,
               ...props.style,
             }}
           >
@@ -85,13 +87,15 @@ export default function IngredientsSearchInput({
                 <div className="px-3 py-1 fst-italic">
                   {matchingIngredients.length} matches
                 </div>
-                <ListGroup variant="flush">
+                <ListGroup variant="flush" role="menu">
                   {matchingIngredients?.map((ingredient) => (
                     <ListGroup.Item
+                      role="menuitem"
                       key={ingredient.id}
                       action
                       onClick={() => {
                         setQuery("");
+                        target.current?.focus();
                         onIngredientSelect?.(ingredient);
                       }}
                     >

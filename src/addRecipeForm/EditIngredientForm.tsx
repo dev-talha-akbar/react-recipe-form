@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 
 import { RecipeIngredient } from "../types";
 
-export interface IIngredientEditFormProps {
+export interface IEditIngredientFormProps {
   recipeIngredient: RecipeIngredient;
   onChange?: (newRecipeIngredient: RecipeIngredient) => void;
 }
@@ -13,7 +13,7 @@ export interface IIngredientEditFormProps {
 export default function IngredientEditForm({
   recipeIngredient: initialRecipeIngredient,
   onChange,
-}: IIngredientEditFormProps) {
+}: IEditIngredientFormProps) {
   const [isFormShown, setIsFormShown] = useState(false);
   const [recipeIngredient, setRecipeIngredient] = useState<RecipeIngredient>(
     initialRecipeIngredient
@@ -40,9 +40,15 @@ export default function IngredientEditForm({
                 type="number"
                 value={recipeIngredient.quantity}
                 onChange={(e) => {
+                  const newQuantity = parseInt(e.target.value, 10);
+
+                  if (Number.isNaN(newQuantity) || newQuantity < 1) {
+                    return;
+                  }
+
                   const newRecipeIngredient = {
                     ...recipeIngredient,
-                    quantity: parseInt(e.target.value, 10),
+                    quantity: newQuantity,
                   };
 
                   setRecipeIngredient(newRecipeIngredient);
@@ -74,7 +80,9 @@ export default function IngredientEditForm({
                 }}
               >
                 {recipeIngredient.ingredient.unitsOfMeasure.map((unit) => (
-                  <option value={unit.id}>{unit.title}</option>
+                  <option key={unit.id} value={unit.id}>
+                    {unit.title}
+                  </option>
                 ))}
               </Form.Select>
             </Form.Group>
