@@ -1,0 +1,23 @@
+{
+  "Add recipe": "Rezept hinzufügen",
+  "Automatic draft saved": "Automatischer Entwurf gespeichert",
+  "Choose ingredients": "Wählen Sie Zutaten",
+  "Loading...": "Wird geladen...",
+  "Name your recipe": "Benennen Sie Ihr Rezept",
+  "No ingredients added": "Keine Zutaten hinzugefügt",
+  "No matching ingredients in the database": "Keine passenden Zutaten in der Datenbank",
+  "Publish recipe": "Rezept veröffentlichen",
+  "Quantity": "Menge",
+  "Recipe Guide": "Rezeptführer",
+  "Search for an ingredient": "Suchen Sie nach einer Zutat",
+  "Searching ingredients...": "Suche nach Zutaten...",
+  "Selected ingredients": "Ausgewählte Zutaten",
+  "Specify ingredient": "Zutat angeben",
+  "Specifying ingredients separately help users find relevant recipes": "Durch die separate Angabe der Zutaten können Benutzer relevante Rezepte finden",
+  "The recipe will be shown in the search results based on its title.": "Das Rezept wird anhand seines Titels in den Suchergebnissen angezeigt.",
+  "Title": "Titel",
+  "Unit": "Einheit",
+  "Write your recipe here with step-by-step instructions.": "Schreiben Sie hier Ihr Rezept mit Schritt-für-Schritt-Anleitung.",
+  "{{count}} matches": "1 Spiel",
+  "{{count}} matches_plural": "1 Spiele"
+}

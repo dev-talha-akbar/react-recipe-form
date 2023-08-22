@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -14,6 +16,8 @@ export default function IngredientEditForm({
   recipeIngredient: initialRecipeIngredient,
   onChange,
 }: IEditIngredientFormProps) {
+  const { t } = useTranslation();
+
   const [isFormShown, setIsFormShown] = useState(false);
   const [recipeIngredient, setRecipeIngredient] = useState<RecipeIngredient>(
     initialRecipeIngredient
@@ -30,12 +34,12 @@ export default function IngredientEditForm({
       </Button>
       <Modal show={isFormShown} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Specify ingredient</Modal.Title>
+          <Modal.Title>{t("Specify ingredient")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="quantity">
-              <Form.Label>Quantity</Form.Label>
+              <Form.Label>{t("Quantity")}</Form.Label>
               <Form.Control
                 type="number"
                 value={recipeIngredient.quantity}
@@ -57,7 +61,7 @@ export default function IngredientEditForm({
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="unit">
-              <Form.Label>Unit</Form.Label>
+              <Form.Label>{t("Unit")}</Form.Label>
               <Form.Select
                 value={recipeIngredient.unit.id}
                 onChange={(e) => {

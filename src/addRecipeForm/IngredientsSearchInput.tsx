@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Overlay from "react-bootstrap/Overlay";
@@ -18,6 +20,8 @@ export default function IngredientsSearchInput({
   onIngredientSelect,
   ...rest
 }: IngredientsSearchInputProps) {
+  const { t } = useTranslation();
+
   const [query, setQuery] = useState("");
   const cleanQuery = query.trim();
 
@@ -28,11 +32,11 @@ export default function IngredientsSearchInput({
   return (
     <div {...rest}>
       <Form.Group className="mb-3" controlId="ingredientsSelect">
-        <Form.Label>Choose ingredients</Form.Label>
+        <Form.Label>{t("Choose ingredients")}</Form.Label>
         <Form.Control
           ref={target}
           type="text"
-          placeholder="Search for an ingredient"
+          placeholder={t("Search for an ingredient")}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -69,23 +73,27 @@ export default function IngredientsSearchInput({
                     size="sm"
                     role="status"
                   >
-                    <span className="visually-hidden">Loading...</span>
+                    <span className="visually-hidden">{t("Loading...")}</span>
                   </Spinner>
-                  <span>Searching ingredients matching '{cleanQuery}'...</span>
+                  <span>{t("Searching ingredients...")}</span>
                 </div>
               </Card.Body>
             )}
             {matchingIngredients && matchingIngredients.length === 0 && (
               <Card.Body>
                 <div className="text-center">
-                  <Card.Text>No matching ingredients in the database</Card.Text>
+                  <Card.Text>
+                    {t("No matching ingredients in the database")}
+                  </Card.Text>
                 </div>
               </Card.Body>
             )}
             {matchingIngredients && matchingIngredients.length > 0 && (
               <>
                 <div className="px-3 py-1 fst-italic">
-                  {matchingIngredients.length} matches
+                  {t("{{count}} matches", {
+                    count: matchingIngredients.length,
+                  })}
                 </div>
                 <ListGroup variant="flush" role="menu">
                   {matchingIngredients?.map((ingredient) => (

@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import { useTranslation } from "react-i18next";
+
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
@@ -19,6 +22,8 @@ export default function IngredientsSelect({
   onChange,
   ...rest
 }: IngredientsSelectProps) {
+  const { t } = useTranslation();
+
   const [ingredients, setIngredients] =
     useState<RecipeIngredient[]>(initialIngredients);
 
@@ -46,10 +51,11 @@ export default function IngredientsSelect({
         <Card className="text-center bg-body-secondary border-0">
           <Card.Body>
             <div className="p-4">
-              <Card.Title>No ingredients added</Card.Title>
+              <Card.Title>{t("No ingredients added")}</Card.Title>
               <Card.Text>
-                Specifying ingredients separately help users find relevant
-                recipes
+                {t(
+                  "Specifying ingredients separately help users find relevant recipes"
+                )}
               </Card.Text>
             </div>
           </Card.Body>
@@ -58,7 +64,7 @@ export default function IngredientsSelect({
 
       {ingredients.length > 0 && (
         <Card>
-          <Card.Header>Selected ingredients</Card.Header>
+          <Card.Header>{t("Selected ingredients")}</Card.Header>
           <ListGroup variant="flush">
             {ingredients?.map((recipeIngredient, index) => (
               <ListGroup.Item key={recipeIngredient.ingredient.id}>
